@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Father's Day - Mr Das</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    overflow:hidden;
+    height:100vh;
+    background:radial-gradient(circle at center,#0b1026,#000);
+    font-family:Arial,sans-serif;
+    color:white;
+}
+
+.space{
+    position:fixed;
+    width:100%;
+    height:100%;
+}
+
+.star{
+    position:absolute;
+    width:3px;
+    height:3px;
+    background:white;
+    border-radius:50%;
+    animation:twinkle 2s infinite;
+}
+
+@keyframes twinkle{
+    50%{opacity:0.2;}
+}
+
+.blackhole{
+    position:absolute;
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    background:black;
+    box-shadow:
+        0 0 20px purple,
+        0 0 40px blue,
+        0 0 60px violet;
+    animation:rotateHole 8s linear infinite;
+}
+
+@keyframes rotateHole{
+    from{transform:rotate(0deg);}
+    to{transform:rotate(360deg);}
+}
+
+.container{
+    position:relative;
+    z-index:10;
+    text-align:center;
+    top:50%;
+    transform:translateY(-50%);
+}
+
+h1{
+    font-size:4rem;
+    color:gold;
+    text-shadow:0 0 20px gold;
+    animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+    from{transform:scale(1);}
+    to{transform:scale(1.05);}
+}
+
+.subtitle{
+    font-size:1.8rem;
+    margin:10px;
+}
+
+.photo-frame{
+    width:260px;
+    height:320px;
+    margin:auto;
+    border:5px solid gold;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 0 30px gold;
+}
+
+.photo-frame img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.message{
+    margin-top:20px;
+    font-size:1.3rem;
+    max-width:800px;
+    margin-left:auto;
+    margin-right:auto;
+    padding:10px;
+}
+
+.balloon{
+    position:absolute;
+    width:50px;
+    height:70px;
+    border-radius:50%;
+    animation:floatUp linear infinite;
+}
+
+.balloon::after{
+    content:"";
+    position:absolute;
+    width:2px;
+    height:60px;
+    background:white;
+    left:50%;
+    top:70px;
+}
+
+@keyframes floatUp{
+    from{
+        transform:translateY(120vh);
+    }
+    to{
+        transform:translateY(-150px);
+    }
+}
+
+.footer{
+    margin-top:20px;
+    color:#aaa;
+}
+</style>
+</head>
+<body>
+
+<div class="space" id="space"></div>
+
+<div class="container">
+    <h1>Happy Father's Day</h1>
+    <div class="subtitle">MR DAS</div>
+
+    <div class="photo-frame">
+        <img id="slideshow" src="dad1.jpg">
+    </div>
+
+    <div class="message">
+        Thank you for your endless support, guidance and love.
+        You are my hero, my inspiration and my strength.
+        Wishing you a wonderful Father's Day!
+    </div>
+
+    <div class="footer">
+        ❤️ With Love ❤️
+    </div>
+</div>
+
+<script>
+
+// Stars
+const space=document.getElementById("space");
+
+for(let i=0;i<150;i++){
+    const star=document.createElement("div");
+    star.className="star";
+    star.style.left=Math.random()*100+"%";
+    star.style.top=Math.random()*100+"%";
+    star.style.animationDuration=(1+Math.random()*3)+"s";
+    space.appendChild(star);
+}
+
+// Black Holes
+for(let i=0;i<3;i++){
+    const hole=document.createElement("div");
+    hole.className="blackhole";
+    hole.style.left=Math.random()*90+"%";
+    hole.style.top=Math.random()*80+"%";
+    space.appendChild(hole);
+}
+
+// Balloons
+const colors=["red","blue","green","yellow","orange","pink","purple"];
+
+for(let i=0;i<25;i++){
+    const balloon=document.createElement("div");
+    balloon.className="balloon";
+    balloon.style.background=
+        colors[Math.floor(Math.random()*colors.length)];
+    balloon.style.left=Math.random()*100+"%";
+    balloon.style.animationDuration=
+        (8+Math.random()*10)+"s";
+    balloon.style.animationDelay=
+        Math.random()*5+"s";
+    document.body.appendChild(balloon);
+}
+
+// Photo Slideshow
+const photos=["dad1.jpg","dad2.jpg"];
+let index=0;
+
+setInterval(()=>{
+    index=(index+1)%photos.length;
+    document.getElementById("slideshow").src=photos[index];
+},3000);
+
+</script>
+
+</body>
+</html>
